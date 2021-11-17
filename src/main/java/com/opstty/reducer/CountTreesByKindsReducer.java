@@ -11,7 +11,7 @@ public class CountTreesByKindsReducer extends Reducer<Text, IntWritable, Text, I
     public void reduce(Text key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
         int sum=0;
         for(IntWritable value: values){
-            sum+=1;
+            sum+=value.get();
         }
         context.write(key, new IntWritable(sum));
     }

@@ -15,7 +15,8 @@ public class MaxHeightPerKindMapper extends Mapper<Object, Text, Text, FloatWrit
         if(!line.startsWith("GEOPOINT")){
             String [] tokens = line.split(";");
             word.set(tokens[2]);
-            context.write(word, new FloatWritable(Float.parseFloat(tokens[6])));
+            float height = tokens[6].isEmpty() ? 0  : Float.parseFloat(tokens[6]);
+            context.write(word, new FloatWritable(height));
         }
     }
 }
