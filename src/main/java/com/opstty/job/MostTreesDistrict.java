@@ -44,19 +44,22 @@ public class MostTreesDistrict {
 
         job1.waitForCompletion(true);
 
-        /* JOB 2 configuration */
-        Job job2 = Job.getInstance(conf, "mostTreesDistrict");
+       /* JOB 2 configuration */
+       // Configuration conf2 = new Configuration();
+       /* Job job2 = Job.getInstance(conf, "mostTreesDistrict");
         job2.setJarByClass(MostTreesDistrict.class);
         job2.setMapperClass(MostTreesDistrictMapper2.class);
-        job2.setCombinerClass(MostTreesDistrictReducer2.class);
+        //job2.setCombinerClass(MostTreesDistrictReducer2.class);
         job2.setReducerClass(MostTreesDistrictReducer2.class);
 
+        job2.setMapOutputKeyClass(IntWritable.class);
+        job2.setMapOutputValueClass(IntTupleWritable.class);
         job2.setOutputKeyClass(IntWritable.class);
         job2.setOutputValueClass(NullWritable.class);
 
-        FileInputFormat.addInputPath(job2, new Path(args[1]));
-        FileOutputFormat.setOutputPath(job2, new Path(args[2]));
+        FileInputFormat.addInputPath(job2, new Path(args[2]));
+        FileOutputFormat.setOutputPath(job2, new Path(args[3]));*/
 
-        System.exit(job2.waitForCompletion(true) ? 0 : 1);
+        System.exit(job1.waitForCompletion(true) ? 0 : 1);
     }
 }

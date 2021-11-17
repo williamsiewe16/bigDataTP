@@ -1,10 +1,7 @@
 package com.opstty.reducer;
 
 import com.opstty.IntTupleWritable;
-import org.apache.hadoop.io.FloatWritable;
-import org.apache.hadoop.io.IntWritable;
-import org.apache.hadoop.io.NullWritable;
-import org.apache.hadoop.io.Text;
+import org.apache.hadoop.io.*;
 import org.apache.hadoop.mapreduce.Reducer;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.mockito.Mockito.verify;
@@ -30,11 +28,17 @@ public class OldestTreeDistrictReducerTest {
 
     @Test
     public void testReduce() throws IOException, InterruptedException {
-        IntTupleWritable i = new IntTupleWritable(17,1715);
-        IntTupleWritable i1 = new IntTupleWritable(8,1718);
-        IntTupleWritable min = new IntTupleWritable(5,1710);
-        Iterable<IntTupleWritable> values = Arrays.asList(i,i1,min);
+        MapWritable map1 = new MapWritable();
+        map1.put(new Text("arrondissement"),new IntWritable(6));
+        map1.put(new Text("annee"),new IntWritable(1605));
+        MapWritable map2 = new MapWritable();
+        map2.put(new Text("arrondissement"),new IntWritable(5));
+        map2.put(new Text("annee"),new IntWritable(1492));
+        MapWritable map3 = new MapWritable();
+        map3.put(new Text("arrondissement"),new IntWritable(4));
+        map3.put(new Text("annee"),new IntWritable(1952));
+        Iterable<MapWritable> values = Arrays.asList(map1,map3,map2);
         this.oldestTreeDistrictReducer.reduce(new IntWritable(1), values, this.context);
-        verify(this.context).write(new IntWritable(min.get()[0]), NullWritable.get());
+        verify(this.context).write(new IntWritable(5), NullWritable.get());
     }
 }

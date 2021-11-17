@@ -13,7 +13,7 @@ public class MostTreesDistrictReducer1 extends Reducer<IntWritable, IntWritable,
     public void reduce(IntWritable key, Iterable<IntWritable> values, Context context) throws IOException, InterruptedException {
         int sum=0;
         for(IntWritable value: values){
-            sum+=1;
+            sum+=value.get();
         }
         context.write(key, new IntWritable(sum));
     }

@@ -3,6 +3,7 @@ package com.opstty.mapper;
 import com.opstty.IntTupleWritable;
 import org.apache.hadoop.io.FloatWritable;
 import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.MapWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 import org.junit.Before;
@@ -29,9 +30,12 @@ public class OldestTreeDistrictMapperTest {
 
     @Test
     public void testMap() throws IOException, InterruptedException {
-        String value = "foo;1;17;sephora;tom;1605;12.0;4";
+        MapWritable map = new MapWritable();
+        map.put(new Text("arrondissement"),new IntWritable(6));
+        map.put(new Text("annee"),new IntWritable(1605));
+        String value = "foo;6;17;sephora;tom;1605;12.0;4";
         this.oldestTreeDistrictMapper.map(null, new Text(value), this.context);
         verify(this.context, times(1))
-                .write(new IntWritable(1), new IntTupleWritable(1,1605));
+                .write(new IntWritable(1), map);
     }
 }
