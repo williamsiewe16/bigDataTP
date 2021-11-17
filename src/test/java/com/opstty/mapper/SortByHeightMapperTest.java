@@ -28,7 +28,7 @@ public class SortByHeightMapperTest {
 
     @Test
     public void testMap() throws IOException, InterruptedException {
-        String value = "foo;1;tux;sephora;tom;pa;fo;12.0;4";
+        String value = "foo;1;tux;sephora;tom;pa;12.0;4";
         this.sortByHeightMapper.map(null, new Text(value), this.context);
         verify(this.context, times(1))
                 .write(new IntWritable(1), new FloatWritable(12.0F));

@@ -29,6 +29,8 @@ public class SortByHeight {
         job.setCombinerClass(SortByHeightReducer.class);
         job.setReducerClass(SortByHeightReducer.class);
 
+        job.setMapOutputKeyClass(IntWritable.class);
+        job.setMapOutputValueClass(FloatWritable.class);
         job.setOutputKeyClass(FloatWritable.class);
         job.setOutputValueClass(NullWritable.class);
 

@@ -13,7 +13,8 @@ public class SortByHeightMapper extends Mapper<Object, Text, IntWritable, FloatW
         String line = value.toString();
         if(!line.startsWith("GEOPOINT")){
             String [] tokens = line.split(";");
-            context.write(new IntWritable(1), new FloatWritable(Float.parseFloat(tokens[7])));
+            float height = tokens[6].isEmpty() ? 0  : Float.parseFloat(tokens[6]);
+            context.write(new IntWritable(1), new FloatWritable(height));
         }
     }
 }

@@ -215,6 +215,10 @@ public class OldestTreeDistrictReducer extends Reducer<IntWritable, MapWritable,
 }
 ```
 
+```bash
+hdfs dfs -cat tp2/oldestTreesDistrict/part-r-00000
+5
+```
 
 ## 7- District containing the most trees
 
@@ -284,4 +288,9 @@ public class MostTreesDistrictReducer2 extends Reducer<IntWritable, IntTupleWrit
         context.write(new IntWritable(arrondissement), NullWritable.get());
     }
 }
+```
+
+```bash
+hdfs dfs -cat tp2/mostTreesDistrict/out/part-r-00000
+16
 ```
