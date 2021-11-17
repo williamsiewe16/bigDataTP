@@ -438,7 +438,16 @@ public void testReduce() throws IOException, InterruptedException {
 ```
 
 ```bash
-
+[loic.william.siewe.dahe@hadoop-edge01 ~]$ hdfs dfs -cat tp2/sortByHeight/part-r-00000
+2.0
+5.0 
+6.0 
+9.0 
+10.0 
+10.0 
+10.0
+0.0 
+...
 ```
 
 ## 6- District containing the oldest tree
